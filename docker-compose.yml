@@ -1,0 +1,14 @@
+services:
+  pve-corosync-qdevice-voter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        ROOT_PASSWORD: ${ROOT_PASSWORD}
+    ports:
+      - "22:22"
+    environment:
+      - ROOT_PASSWORD=${ROOT_PASSWORD} # Change. Default = cluster1337
+    volumes:
+      - ./corosync-data:/etc/corosync
+    restart: unless-stopped
